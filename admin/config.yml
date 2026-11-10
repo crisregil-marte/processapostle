@@ -3,6 +3,9 @@ backend:
   name: turbo-github
   turbo_site_id: 79cdc96c-aad7-46a2-a84f-273ce61d540d
 
+media_folder: "images/uploads"
+public_folder: "/processapostle/images/uploads"
+ 
 collections:
   - name: video_library
     label: Video Collection
