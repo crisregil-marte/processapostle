@@ -1,3 +1,11 @@
 {
-  "videos": []
+  "videos": [
+    {
+      "published": true,
+      "title": "Toggle",
+      "youtube_url": "https://youtu.be/PIwzJc-MkZ0",
+      "category": "General",
+      "description": "Tweaking the Site"
+    }
+  ]
 }
