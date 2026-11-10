@@ -1,0 +1,12 @@
+
+{
+  "videos": [
+    {
+      "title": "Sample Video (Test Only)",
+      "youtube_url": "https://youtu.be/Xli_OByPaDo",
+      "category": "General",
+      "description": "Temporary sample entry for testing the ProcessApostle video collection. This will eventually be replaced with official educational content.",
+      "published": true
+    }
+  ]
+}
