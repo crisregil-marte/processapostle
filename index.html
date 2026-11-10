@@ -263,16 +263,22 @@
     </div>
   </section>
 
-  <section id="videos">
-    <div class="intro">
-      <h2 class="section-title">ProcessApostle Video Collection</h2>
-      <p>
-        A growing collection of educational videos designed to
-        make Philippine land processes easier to understand.
-      </p>
-    </div>
+ <section id="videos">
+  <div class="intro">
+    <h2 class="section-title">ProcessApostle Video Collection</h2>
 
-       </section>
+    <p>
+      A growing collection of educational videos designed to
+      make Philippine land processes easier to understand.
+    </p>
+  </div>
+
+  <div id="video-list">
+    <p style="text-align:center;">Loading videos...</p>
+  </div>
+
+  <p id="video-message" style="text-align:center; margin-top:20px;"></p>
+</section>
 
 <div class="video-card">
 
@@ -326,5 +332,120 @@
   <p>Educational Advocacy | Philippines</p>
 </footer>
 
+
+<script>
+async function loadVideos() {
+  const videoList = document.getElementById("video-list");
+  const message = document.getElementById("video-message");
+
+  try {
+    const response = await fetch("content/videos.json");
+
+    if (!response.ok) {
+      throw new Error("Video catalogue could not be loaded.");
+    }
+
+    const data = await response.json();
+
+    const videos = (data.videos || []).filter(
+      video => video.published === true
+    );
+
+    if (videos.length === 0) {
+      message.textContent = "New educational videos will be added soon.";
+      return;
+    }
+
+    videos.forEach(video => {
+      let videoId = "";
+
+      try {
+        const url = new URL(video.youtube_url);
+        const host = url.hostname.replace(/^www\./, "");
+
+        if (host === "youtu.be") {
+          videoId = url.pathname.slice(1).split("/")[0];
+        } else if (
+          host === "youtube.com" ||
+          host === "m.youtube.com"
+        ) {
+          if (url.pathname === "/watch") {
+            videoId = url.searchParams.get("v") || "";
+          } else {
+            const match = url.pathname.match(
+              /^\/(embed|shorts)\/([^/]+)/
+            );
+            videoId = match ? match[2] : "";
+          }
+        }
+      } catch (error) {
+        console.warn("Invalid YouTube address:", video.youtube_url);
+      }
+
+      if (!/^[a-zA-Z0-9_-]{11}$/.test(videoId)) {
+        return;
+      }
+
+      const card = document.createElement("div");
+      card.className = "video-card";
+
+      const frame = document.createElement("div");
+      frame.style.cssText =
+        "position:relative;width:100%;aspect-ratio:16/9;";
+
+      const iframe = document.createElement("iframe");
+      iframe.src =
+        "https://www.youtube-nocookie.com/embed/" +
+        encodeURIComponent(videoId);
+      iframe.title = video.title || "ProcessApostle video";
+      iframe.loading = "lazy";
+      iframe.allowFullscreen = true;
+      iframe.referrerPolicy = "strict-origin-when-cross-origin";
+      iframe.allow =
+        "accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share";
+      iframe.style.cssText =
+        "position:absolute;top:0;left:0;width:100%;height:100%;border:0;";
+
+      frame.appendChild(iframe);
+
+      const content = document.createElement("div");
+      content.className = "video-content";
+
+      const title = document.createElement("h3");
+      title.textContent = video.title || "Untitled video";
+
+      const category = document.createElement("p");
+      category.textContent = "Category: " + (video.category || "General");
+
+      const description = document.createElement("p");
+      description.textContent = video.description || "";
+
+      content.appendChild(title);
+      content.appendChild(category);
+      content.appendChild(description);
+
+      card.appendChild(frame);
+      card.appendChild(content);
+
+      videoList.appendChild(card);
+    });
+
+    if (!videoList.children.length) {
+      message.textContent = "No valid published videos are available yet.";
+    }
+
+  } catch (error) {
+    message.textContent =
+      "The video collection is temporarily unavailable.";
+    console.error(error);
+  }
+}
+
+loadVideos();
+</script>
+</body>
+</html>
+
+  
 </body>
 </html>
