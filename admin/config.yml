@@ -1,8 +1,7 @@
 
 backend:
   name: turbo-github
-  turbo_site_id: PENDING_CREATE_SITE_IN_TURBO
-  branch: main
+  turbo_site_id: 79cdc96c-aad7-46a2-a84f-273ce61d540d
 
 collections:
   - name: video_library
@@ -28,7 +27,6 @@ collections:
               - label: YouTube URL
                 name: youtube_url
                 widget: string
-                hint: Paste the YouTube video link here.
 
               - label: Category
                 name: category
@@ -49,3 +47,5 @@ collections:
                 name: published
                 widget: boolean
                 default: false
+
+
