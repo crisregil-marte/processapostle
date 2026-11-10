@@ -1,0 +1,51 @@
+
+backend:
+  name: turbo-github
+  turbo_site_id: PENDING_CREATE_SITE_IN_TURBO
+  branch: main
+
+collections:
+  - name: video_library
+    label: Video Collection
+
+    files:
+      - name: videos
+        label: Manage Videos
+        file: content/videos.json
+
+        fields:
+          - label: Video Entries
+            name: videos
+            widget: list
+            label_singular: Video
+            summary: "{{fields.title}}"
+
+            fields:
+              - label: Video Title
+                name: title
+                widget: string
+
+              - label: YouTube URL
+                name: youtube_url
+                widget: string
+                hint: Paste the YouTube video link here.
+
+              - label: Category
+                name: category
+                widget: select
+                options:
+                  - General
+                  - Land Transactions
+                  - Compliance and Clearances
+                  - Agrarian Reform
+                  - Agricultural Tenancy
+                  - Land Disputes
+
+              - label: Description
+                name: description
+                widget: text
+
+              - label: Published
+                name: published
+                widget: boolean
+                default: false
