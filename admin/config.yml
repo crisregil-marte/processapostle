@@ -22,6 +22,8 @@ collections:
             label_singular: Video
             summary: "{{fields.title}}"
 
+  
+
             fields:
               - label: Video Title
                 name: title
@@ -51,4 +53,4 @@ collections:
                 widget: boolean
                 default: false
 
-
+<script src="https://cdn.jsdelivr.net/npm/decap-cms@^3.0.0/dist/decap-cms.js"></script>
