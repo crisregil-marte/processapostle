@@ -1,4 +1,3 @@
-
 {
   "videos": [
     {
@@ -7,6 +6,13 @@
       "category": "General",
       "description": "Temporary sample entry for testing the ProcessApostle video collection. This will eventually be replaced with official educational content.",
       "published": true
+    },
+    {
+      "published": false,
+      "title": "CMS Test Entry",
+      "youtube_url": "https://youtu.be/PIwzJc-MkZ0",
+      "category": "General",
+      "description": "Administration System Testing"
     }
   ]
 }
