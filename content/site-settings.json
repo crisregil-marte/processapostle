@@ -1,0 +1,85 @@
+
+{
+  "browser_title": "ProcessApostle | Understanding Land Processes",
+  "meta_description": "ProcessApostle is an educational advocacy helping Philippine citizens understand land transactions, compliance, agrarian reform and land disputes.",
+
+  "brand_name": "PROCESS APOSTLE",
+
+  "navigation": {
+    "about": "About",
+    "topics": "Topics",
+    "videos": "Videos",
+    "consultancy": "Consultancy"
+  },
+
+  "hero": {
+    "eyebrow": "EDUCATION • ADVOCACY • PUBLIC SERVICE",
+    "heading": "Understanding Land Processes, One Step at a Time.",
+    "description": "An educational advocacy dedicated to helping Philippine citizens understand the processes involving land transactions, compliance requirements, agrarian reform and land disputes.",
+    "primary_button": "Explore Videos",
+    "secondary_button": "Consultancy Services",
+    "background_image": "",
+    "background_position": "center"
+  },
+
+  "about": {
+    "heading": "What is ProcessApostle?",
+    "paragraph": "Government processes can sometimes be difficult to understand. ProcessApostle seeks to make these processes more accessible through educational videos, practical explanations and citizen-friendly information. Our purpose is to help people become better informed about their rights, responsibilities and available remedies.",
+    "image": ""
+  },
+
+  "topics": {
+    "heading": "Explore Our Topics",
+    "intro": "Understanding the process is the beginning of finding a way forward.",
+    "land_transactions_title": "Land Transactions",
+    "land_transactions_description": "Understanding land acquisition, transfers, documentation and the processes involved.",
+    "compliance_title": "Compliance and Clearances",
+    "compliance_description": "A practical look at documentary requirements, government offices and regulatory procedures.",
+    "agrarian_title": "Agrarian Reform",
+    "agrarian_description": "Understanding land coverage, distribution, CLOAs, agricultural tenancy and related concerns.",
+    "disputes_title": "Land Disputes",
+    "disputes_description": "Exploring dispute resolution, mediation, legal remedies and administrative processes.",
+    "background_image": ""
+  },
+
+  "video_section": {
+    "heading": "ProcessApostle Video Collection",
+    "description": "A growing collection of educational videos designed to make Philippine land processes easier to understand."
+  },
+
+  "consultancy": {
+    "heading": "Need Assistance?",
+    "description": "For individuals who need assistance with land-related concerns, consultancy services are available through separate consultation arrangements.",
+    "button": "Consultation Inquiries",
+    "note": "Booking and contact details will be provided here."
+  },
+
+  "footer": {
+    "brand": "PROCESS APOSTLE",
+    "tagline": "Making Philippine Land Processes More Understandable.",
+    "note": "Educational Advocacy | Philippines"
+  },
+
+  "colors": {
+    "page_background": "#f7f7f0",
+    "body_text": "#26382d",
+    "header_background": "#194b37",
+    "header_text": "#ffffff",
+    "hero_background": "#e7eddf",
+    "eyebrow_text": "#60804e",
+    "heading_text": "#194b37",
+    "hero_text": "#506153",
+    "button_background": "#194b37",
+    "button_text": "#ffffff",
+    "section_heading": "#194b37",
+    "topic_card_background": "#ffffff",
+    "topic_card_border": "#e0e5dc",
+    "topic_heading": "#286447",
+    "video_section_background": "#edf1e8",
+    "video_card_background": "#ffffff",
+    "video_card_border": "#dce3d7",
+    "video_placeholder_background": "#294c3b",
+    "footer_background": "#194b37",
+    "footer_text": "#ffffff"
+  }
+}
