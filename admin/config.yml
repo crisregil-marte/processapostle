@@ -22,8 +22,6 @@ collections:
             label_singular: Video
             summary: "{{fields.title}}"
 
-  
-
             fields:
               - label: Video Title
                 name: title
@@ -52,3 +50,132 @@ collections:
                 name: published
                 widget: boolean
                 default: false
+
+
+  - name: site_appearance
+    label: Website Appearance
+
+    files:
+      - name: homepage
+        label: Homepage Settings
+        file: content/site-settings.json
+
+        fields:
+          - label: Browser Title
+            name: browser_title
+            widget: string
+
+          - label: Website Description
+            name: meta_description
+            widget: text
+
+          - label: Brand Name
+            name: brand_name
+            widget: string
+
+          - label: Navigation
+            name: navigation
+            widget: object
+            fields:
+              - { label: About, name: about, widget: string }
+              - { label: Topics, name: topics, widget: string }
+              - { label: Videos, name: videos, widget: string }
+              - { label: Consultancy, name: consultancy, widget: string }
+
+          - label: Homepage Banner
+            name: hero
+            widget: object
+            fields:
+              - { label: Eyebrow Text, name: eyebrow, widget: string }
+              - { label: Main Heading, name: heading, widget: string }
+              - { label: Introduction, name: description, widget: text }
+              - { label: Main Button, name: primary_button, widget: string }
+              - { label: Secondary Button, name: secondary_button, widget: string }
+              - label: Background Image
+                name: background_image
+                widget: image
+                required: false
+              - label: Image Position
+                name: background_position
+                widget: select
+                options: [center, top, bottom, left, right]
+                default: center
+
+          - label: About Section
+            name: about
+            widget: object
+            fields:
+              - { label: Section Heading, name: heading, widget: string }
+              - { label: Description, name: paragraph, widget: text }
+              - label: Section Image
+                name: image
+                widget: image
+                required: false
+
+          - label: Topics Section
+            name: topics
+            widget: object
+            fields:
+              - { label: Section Heading, name: heading, widget: string }
+              - { label: Introduction, name: intro, widget: text }
+              - { label: Land Transactions Title, name: land_transactions_title, widget: string }
+              - { label: Land Transactions Description, name: land_transactions_description, widget: text }
+              - { label: Compliance Title, name: compliance_title, widget: string }
+              - { label: Compliance Description, name: compliance_description, widget: text }
+              - { label: Agrarian Reform Title, name: agrarian_title, widget: string }
+              - { label: Agrarian Reform Description, name: agrarian_description, widget: text }
+              - { label: Land Disputes Title, name: disputes_title, widget: string }
+              - { label: Land Disputes Description, name: disputes_description, widget: text }
+              - label: Section Background Image
+                name: background_image
+                widget: image
+                required: false
+
+          - label: Video Section
+            name: video_section
+            widget: object
+            fields:
+              - { label: Heading, name: heading, widget: string }
+              - { label: Introduction, name: description, widget: text }
+
+          - label: Consultancy Section
+            name: consultancy
+            widget: object
+            fields:
+              - { label: Heading, name: heading, widget: string }
+              - { label: Description, name: description, widget: text }
+              - { label: Button Label, name: button, widget: string }
+              - { label: Additional Note, name: note, widget: text }
+
+          - label: Footer
+            name: footer
+            widget: object
+            fields:
+              - { label: Brand Name, name: brand, widget: string }
+              - { label: Tagline, name: tagline, widget: string }
+              - { label: Footer Note, name: note, widget: string }
+
+          - label: Website Colors
+            name: colors
+            widget: object
+            fields:
+              - { label: Page Background, name: page_background, widget: color, allowInput: true }
+              - { label: Main Text, name: body_text, widget: color, allowInput: true }
+              - { label: Header Background, name: header_background, widget: color, allowInput: true }
+              - { label: Header Text, name: header_text, widget: color, allowInput: true }
+              - { label: Banner Background, name: hero_background, widget: color, allowInput: true }
+              - { label: Eyebrow Text, name: eyebrow_text, widget: color, allowInput: true }
+              - { label: Heading Text, name: heading_text, widget: color, allowInput: true }
+              - { label: Banner Text, name: hero_text, widget: color, allowInput: true }
+              - { label: Button Background, name: button_background, widget: color, allowInput: true }
+              - { label: Button Text, name: button_text, widget: color, allowInput: true }
+              - { label: Section Headings, name: section_heading, widget: color, allowInput: true }
+              - { label: Topic Card Background, name: topic_card_background, widget: color, allowInput: true }
+              - { label: Topic Card Border, name: topic_card_border, widget: color, allowInput: true }
+              - { label: Topic Card Heading, name: topic_heading, widget: color, allowInput: true }
+              - { label: Video Section Background, name: video_section_background, widget: color, allowInput: true }
+              - { label: Video Card Background, name: video_card_background, widget: color, allowInput: true }
+              - { label: Video Card Border, name: video_card_border, widget: color, allowInput: true }
+              - { label: Video Placeholder Background, name: video_placeholder_background, widget: color, allowInput: true }
+              - { label: Footer Background, name: footer_background, widget: color, allowInput: true }
+              - { label: Footer Text, name: footer_text, widget: color, allowInput: true }
