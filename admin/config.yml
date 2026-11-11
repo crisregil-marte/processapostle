@@ -5,6 +5,7 @@ backend:
 
 media_folder: "images/uploads"
 public_folder: "/processapostle/images/uploads"
+
  
 collections:
   - name: video_library
@@ -50,7 +51,6 @@ collections:
                 name: published
                 widget: boolean
                 default: false
-
 
   - name: site_appearance
     label: Website Appearance
