@@ -66,7 +66,7 @@
     }
 
     h1 {
-      font-size: clamp(32px, 5vw,  fifty);
+font-size: clamp(32px, 5vw, 50px);
       line-height: 1.2;
       max-width: 850px;
       margin: 20px auto;
@@ -421,6 +421,198 @@ async function loadVideos() {
 
 loadVideos();
 </script>
+
+<script>
+async function loadSiteSettings() {
+  try {
+    const response = await fetch(
+      "content/site-settings.json?v=" + Date.now(),
+      { cache: "no-store" }
+    );
+
+    if (!response.ok) {
+      throw new Error("Website settings could not be loaded.");
+    }
+
+    const s = await response.json();
+
+    // Helper for changing text safely
+    function setText(selector, value, index = 0) {
+      const elements = document.querySelectorAll(selector);
+      if (elements[index] && typeof value === "string") {
+        elements[index].textContent = value;
+      }
+    }
+
+    // 1. Browser title and description
+    document.title = s.browser_title || document.title;
+
+    const meta = document.querySelector('meta[name="description"]');
+    if (meta && s.meta_description) {
+      meta.content = s.meta_description;
+    }
+
+    // 2. Brand and navigation
+    setText(".brand", s.brand_name);
+    setText('nav a[href="#about"]', s.navigation?.about);
+    setText('nav a[href="#topics"]', s.navigation?.topics);
+    setText('nav a[href="#videos"]', s.navigation?.videos);
+    setText('nav a[href="#consultancy"]', s.navigation?.consultancy);
+
+    // 3. Homepage banner
+    setText(".hero .eyebrow", s.hero?.eyebrow);
+    setText(".hero h1", s.hero?.heading);
+    setText(".hero > p", s.hero?.description);
+    setText(".hero .button", s.hero?.primary_button);
+    setText(".hero .button", s.hero?.secondary_button, 1);
+
+    // 4. About section
+    setText("#about .section-title", s.about?.heading);
+    setText("#about .intro > p", s.about?.paragraph);
+
+    // About section picture
+    const aboutSection = document.querySelector("#about .intro");
+    let aboutImage = document.querySelector("#about-image");
+
+    if (s.about?.image) {
+      if (!aboutImage) {
+        aboutImage = document.createElement("img");
+        aboutImage.id = "about-image";
+        aboutImage.alt = "ProcessApostle illustration";
+        aboutImage.style.cssText =
+          "display:block;width:100%;max-width:600px;margin:25px auto;border-radius:10px;";
+        aboutSection.appendChild(aboutImage);
+      }
+      aboutImage.src = s.about.image;
+    } else if (aboutImage) {
+      aboutImage.remove();
+    }
+
+    // 5. Topic cards
+    setText("#topics .section-title", s.topics?.heading);
+    setText("#topics .intro > p", s.topics?.intro);
+
+    const topicData = [
+      [s.topics?.land_transactions_title, s.topics?.land_transactions_description],
+      [s.topics?.compliance_title, s.topics?.compliance_description],
+      [s.topics?.agrarian_title, s.topics?.agrarian_description],
+      [s.topics?.disputes_title, s.topics?.disputes_description]
+    ];
+
+    document.querySelectorAll("#topics .topic").forEach((card, i) => {
+      if (topicData[i]) {
+        const title = card.querySelector("h3");
+        const description = card.querySelector("p");
+
+        if (title) title.textContent = topicData[i][0] || "";
+        if (description) description.textContent = topicData[i][1] || "";
+      }
+    });
+
+    // 6. Video section headings only.
+    // The existing loadVideos() function remains untouched.
+    setText("#videos .section-title", s.video_section?.heading);
+    setText("#videos .intro > p", s.video_section?.description);
+
+    // 7. Consultancy section
+    setText("#consultancy .section-title", s.consultancy?.heading);
+    setText("#consultancy .intro > p", s.consultancy?.description);
+    setText("#consultancy .button", s.consultancy?.button);
+    setText("#consultancy .intro > p:last-of-type", s.consultancy?.note);
+
+    // 8. Footer
+    setText("footer p", s.footer?.brand);
+    setText("footer p", s.footer?.tagline, 1);
+    setText("footer p", s.footer?.note, 2);
+
+    // 9. Apply colors
+    const c = s.colors || {};
+
+    function color(selector, property, value) {
+      if (!value) return;
+
+      document.querySelectorAll(selector).forEach(element => {
+        element.style[property] = value;
+      });
+    }
+
+    color("body", "backgroundColor", c.page_background);
+    color("body", "color", c.body_text);
+
+    color("header", "backgroundColor", c.header_background);
+    color("header", "color", c.header_text);
+    color("header .brand, header nav a", "color", c.header_text);
+
+    color(".hero", "backgroundColor", c.hero_background);
+    color(".hero .eyebrow", "color", c.eyebrow_text);
+    color(".hero h1", "color", c.heading_text);
+    color(".hero p", "color", c.hero_text);
+
+    color(".button", "backgroundColor", c.button_background);
+    color(".button", "color", c.button_text);
+    color(".button.secondary", "backgroundColor", "transparent");
+    color(".button.secondary", "color", c.button_background);
+    color(".button.secondary", "borderColor", c.button_background);
+
+    color(".section-title", "color", c.section_heading);
+    color(".topic", "backgroundColor", c.topic_card_background);
+    color(".topic", "borderColor", c.topic_card_border);
+    color(".topic h3", "color", c.topic_heading);
+
+    color("#videos", "backgroundColor", c.video_section_background);
+    color(".video-card", "backgroundColor", c.video_card_background);
+    color(".video-card", "borderColor", c.video_card_border);
+    color(".video-placeholder", "backgroundColor", c.video_placeholder_background);
+
+    color("footer", "backgroundColor", c.footer_background);
+    color("footer", "color", c.footer_text);
+
+    // 10. Apply uploaded background pictures
+    function setBackground(selector, image, overlay) {
+      const element = document.querySelector(selector);
+      if (!element) return;
+
+      if (image && typeof image === "string") {
+        const safeImage = image.replace(/["\\\r\n]/g, "");
+
+        element.style.backgroundImage =
+          overlay + ', url("' + safeImage + '")';
+
+        element.style.backgroundSize = "cover";
+        element.style.backgroundRepeat = "no-repeat";
+        element.style.backgroundPosition = "center";
+      } else {
+        element.style.backgroundImage = "none";
+      }
+    }
+
+    setBackground(
+      ".hero",
+      s.hero?.background_image,
+      "linear-gradient(rgba(231,237,223,0.82), rgba(231,237,223,0.82))"
+    );
+
+    setBackground(
+      "#topics",
+      s.topics?.background_image,
+      "linear-gradient(rgba(237,241,232,0.90), rgba(237,241,232,0.90))"
+    );
+
+    const hero = document.querySelector(".hero");
+    if (hero && s.hero?.background_position) {
+      hero.style.backgroundPosition = s.hero.background_position;
+    }
+
+    console.log("ProcessApostle appearance settings loaded.");
+
+  } catch (error) {
+    console.error("Appearance settings error:", error);
+  }
+}
+
+loadSiteSettings();
+</script>
+
 </body>
 </html>
 
